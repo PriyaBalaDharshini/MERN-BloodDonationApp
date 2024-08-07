@@ -23,4 +23,6 @@
 /* Applying Poppins Font Globally */
 body {
   font-family: 'Poppins', sans-serif;
+  padding: 0;
+  margin: 0;
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
+import { Link } from "react-router-dom"
 
 const Footer = () => {
     return (
@@ -19,7 +20,9 @@ const Footer = () => {
                         <li className='hover:underline cursor-pointer'>About Us</li>
                         <li className='hover:underline cursor-pointer'>Donate</li>
                         <li className='hover:underline cursor-pointer'>Contact</li>
-                        <li className='hover:underline cursor-pointer'>Admin</li>
+                        <Link to="/login">
+                            <li className='hover:underline cursor-pointer'>Admin</li>
+                        </Link>
                     </ul>
                 </div>
                 <div className='w-full md:w-1/3'>
