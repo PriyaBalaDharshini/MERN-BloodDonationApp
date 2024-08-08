@@ -2,6 +2,7 @@ import React from 'react'
 import { DataGrid } from '@mui/x-data-grid';
 import { Link } from '@mui/material';
 import { FaEdit, FaTrash } from "react-icons/fa"
+import { FcApproval } from "react-icons/fc";
 
 const Prospects = () => {
 
@@ -12,18 +13,16 @@ const Prospects = () => {
         { field: "bloodgroup", headerName: "Blood Group", width: 80 },
         { field: "healthissues", headerName: "Health Issues", width: 150 },
         {
-            field: "edit", headerName: "Edit", width: 100,
-            renderCell: () => {
+            field: "approve", headerName: "Approve", width: 100,
+            renderCell: (params) => {
                 return (
                     <>
-                        <Link to={`/donor/123`}>
+                        <Link to={`/admin/donor/123`}>
 
                             <button className='text-white cursor-pointer w-[70px]'>
-                                <FaEdit className='text-cyan-600 cursor-pointer m-2' />
+                                <FcApproval className=' cursor-pointer m-2 text-[20px]' />
                             </button>
-                            {/* <button className='bg-cyan-400 rounded-md text-white cursor-pointer w-[70px]'>
-                                Edit
-                            </button> */}
+
                         </Link>
                     </>
                 )
@@ -36,7 +35,7 @@ const Prospects = () => {
                     <>
                         <Link>
                             <button className='text-white cursor-pointer w-[70px]'>
-                                <FaTrash className='text-pink-600 cursor-pointer m-2' />
+                                <FaTrash className='text-red-500 cursor-pointer m-2 text-[18px]' />
                             </button>
                         </Link>
                     </>

@@ -1,6 +1,6 @@
 import React from 'react'
 import { DataGrid } from '@mui/x-data-grid';
-import { Link } from '@mui/material';
+import { Link } from 'react-router-dom';
 import { FaEdit, FaTrash } from "react-icons/fa"
 
 const Donors = () => {
@@ -13,17 +13,15 @@ const Donors = () => {
         { field: "healthissues", headerName: "Health Issues", width: 150 },
         {
             field: "edit", headerName: "Edit", width: 100,
-            renderCell: () => {
+            renderCell: (params) => {
                 return (
                     <>
-                        <Link to={`/donor/123`}>
+                        <Link to={`/admin/donor/123`}>
 
                             <button className='text-white cursor-pointer w-[70px]'>
-                                <FaEdit className='text-cyan-600 cursor-pointer m-2' />
+                                <FaEdit className='text-cyan-600 cursor-pointer m-2 text-[16px]' />
                             </button>
-                            {/* <button className='bg-cyan-400 rounded-md text-white cursor-pointer w-[70px]'>
-                                Edit
-                            </button> */}
+
                         </Link>
                     </>
                 )
@@ -34,9 +32,9 @@ const Donors = () => {
             renderCell: () => {
                 return (
                     <>
-                        <Link>
+                        <Link to="/admin/donor/123">
                             <button className='text-white cursor-pointer w-[70px]'>
-                                <FaTrash className='text-pink-600 cursor-pointer m-2' />
+                                <FaTrash className='text-pink-600 cursor-pointer m-2 text-[16px]' />
                             </button>
                         </Link>
                     </>
@@ -61,7 +59,10 @@ const Donors = () => {
         <div className='w-[80vw] h-[100vh]'>
             <div className='flex items-center justify-between m-[40px]'>
                 <h1 className='m-[20px] text-[20px] font-semibold'>All Donors</h1>
-                <button className='text-[18px] bg-green-600 p-3 rounded-md cursor-pointer text-white font-semibold'>Add Donor</button>
+                <Link to="/admin/newdonor">
+                    <button className='text-[18px] bg-green-600 p-3 rounded-md cursor-pointer text-white font-semibold'>Add Donor</button>
+                </Link>
+
             </div>
             <div className='m-[30px]'>
                 <DataGrid rows={rows} columns={columns} checkboxSelection />

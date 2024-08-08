@@ -6,6 +6,9 @@ import Admin from './Pages/Admin'
 import Donors from './Pages/Donors'
 import Prospects from './Pages/Prospects'
 import Menu from './Components/Menu'
+import NewDonor from './Pages/NewDonor'
+import ProspectPage from './Pages/ProspectPage'
+import DonorPage from './Pages/DonorPage'
 
 function App() {
   const Layout = () => {
@@ -45,6 +48,18 @@ function App() {
         {
           path: "/admin/prospects",
           element: <Prospects />
+        },
+        {
+          path: "/admin/newdonor",
+          element: <NewDonor />
+        },
+        {
+          path: "/admin/donor/:id",
+          element: <DonorPage />
+        },
+        {
+          path: "/admin/prospect/:id",
+          element: <ProspectPage />
         }
       ]
     },
