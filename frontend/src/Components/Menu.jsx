@@ -11,7 +11,7 @@ const Menu = () => {
     }
 
     return (
-        <div className='h-full bg-red-50 p-[20px] w-[250px] shadow-lg'>
+        <div className='h-[100vh] bg-red-50 p-[10px] w-[280px] shadow-lg'>
             <ul className='flex flex-col items-start justify-start mt-[20px] pl-[20px]'>
 
                 <Link to="/admin" onClick={() => handleActiveLink("/admin")}>
