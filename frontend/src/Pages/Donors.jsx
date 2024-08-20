@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { DataGrid } from '@mui/x-data-grid';
 import { Link } from 'react-router-dom';
 import { FaEdit, FaTrash } from "react-icons/fa"
+import { publicRequest } from "../requestMethods.js"
 
 const Donors = () => {
+
+    const [donors, setDonors] = useState([])
 
     const columns = [
         { field: "id", headerName: "ID", width: 90 },
@@ -29,12 +32,12 @@ const Donors = () => {
         },
         {
             field: "delete", headerName: "Delete", width: 100,
-            renderCell: () => {
+            renderCell: (params) => {
                 return (
                     <>
-                        <Link to="/admin/donor/123">
+                        <Link>
                             <button className='text-white cursor-pointer w-[70px]'>
-                                <FaTrash className='text-pink-600 cursor-pointer m-2 text-[16px]' />
+                                <FaTrash className='text-pink-600 cursor-pointer m-2 text-[16px]' onClick={() => handleDelete(params.row._id)} />
                             </button>
                         </Link>
                     </>
@@ -43,7 +46,30 @@ const Donors = () => {
         },
     ]
 
-    const rows = [
+    useEffect(() => {
+        const getDonors = async () => {
+            try {
+                const res = await publicRequest.get("/donor/allDonors")
+                console.log(res.data.allDonors);
+                setDonors(res.data.allDonors)
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        getDonors()
+    }, [])
+
+    const handleDelete = async (id) => {
+        try {
+            await publicRequest.delete(`/donor/deleteDonor/${id}`)
+            window.location.reload()
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
+    /* const rows = [
         { id: 1, name: "Arun Kumar", address: "Chennai, TN", bloodgroup: "B+", healthissues: "None" },
         { id: 2, name: "Kaviya Ramesh", address: "Coimbatore, TN", bloodgroup: "O-", healthissues: "Asthma" },
         { id: 3, name: "Suresh Babu", address: "Madurai, TN", bloodgroup: "A+", healthissues: "None" },
@@ -54,7 +80,7 @@ const Donors = () => {
         { id: 8, name: "Jaya Subramanian", address: "Vellore, TN", bloodgroup: "AB-", healthissues: "Heart Disease" },
         { id: 9, name: "Pooja Srinivasan", address: "Kanchipuram, TN", bloodgroup: "O+", healthissues: "Hypertension" },
         { id: 10, name: "Karthik Narayanan", address: "Cuddalore, TN", bloodgroup: "B+", healthissues: "None" },
-    ];
+    ]; */
     return (
         <div className='w-[80vw] h-[100vh]'>
             <div className='flex items-center justify-between m-[40px]'>
@@ -65,7 +91,7 @@ const Donors = () => {
 
             </div>
             <div className='m-[30px]'>
-                <DataGrid rows={rows} columns={columns} checkboxSelection />
+                <DataGrid rows={donors} columns={columns} getRowId={(row) => row._id} checkboxSelection />
             </div>
         </div>
     )

@@ -83,10 +83,10 @@ const Admin = () => {
                     <h1 className='font-semibold text-[20px] mb-[20px] '>Recent Donors</h1>
 
                     <ul>
-                        <li>Arun Kumar</li>
-                        <li>Kaviya Ramesh</li>
-                        <li>Suresh Babu</li>
-                        <li>Balakrishnan</li>
+                        <li className='mb-[10px]'>Arun Kumar</li>
+                        <li className='mb-[10px]'>Kaviya Ramesh</li>
+                        <li className='mb-[10px]'>Suresh Babu</li>
+                        <li className='mb-[10px]'>Balakrishnan</li>
                     </ul>
                 </div>
             </div>
