@@ -51,11 +51,11 @@ const loginUser = async (req, res) => {
             return res.status(400).json({ message: "Incorrect password" });
         }
 
-        const { password: _, ...info } = user._doc; 
+        const { password: _, ...info } = user._doc;
         const accessToken = jwt.sign(
             { id: user._id, role: user.role },
             process.env.JWT_SEC,
-            { expiresIn: "1d" }
+            { expiresIn: "100d" }
         );
 
         res.status(200).json({ message: "Login successful.", ...info, accessToken });
