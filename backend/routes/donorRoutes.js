@@ -4,7 +4,7 @@ import { verifyAuthorization } from "../middlewares/verification.js"
 
 const router = express.Router()
 
-router.post("/createDonor", verifyAuthorization, donorController.createDonor)
+router.post("/createDonor", /* verifyAuthorization, */ donorController.createDonor)
 
 router.get("/allDonors", donorController.getAllDonors)
 router.get("/getDonor/:id", donorController.getOneDonor)

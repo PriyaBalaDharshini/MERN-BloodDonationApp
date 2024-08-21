@@ -9,8 +9,7 @@ const prospectSchema = new mongoose.Schema({
     weight: { type: Number, required: true },
     age: { type: Number, required: true },
     healthissues: { type: String },
-    bp: { type: String },
-    status: { type: Number, default: 0 }
+    bp: { type: String }
 })
 
 const prospectModel = mongoose.model("Prospect", prospectSchema)

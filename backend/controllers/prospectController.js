@@ -2,7 +2,7 @@ import prospectModel from "../models/prospectModel.js";
 
 const createProspect = async (req, res) => {
     try {
-        const { name, email, address, mobile, bloodgroup, weight, age } = req.body
+        const { name, email, address, mobile, bloodgroup, weight, age, healthissues, bp } = req.body
         if (!name || !email || !address || !mobile || !bloodgroup || !weight || !age) {
             return res.status(400).json({ message: "Please provide all required fields." });
         }
@@ -18,7 +18,9 @@ const createProspect = async (req, res) => {
             mobile,
             bloodgroup,
             weight,
-            age
+            age,
+            healthissues,
+            bp
         });
 
         // Save the new Prospect to the database
