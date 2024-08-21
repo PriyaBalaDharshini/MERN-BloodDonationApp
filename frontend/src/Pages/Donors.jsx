@@ -9,7 +9,7 @@ const Donors = () => {
     const [donors, setDonors] = useState([])
 
     const columns = [
-        { field: "id", headerName: "ID", width: 90 },
+        { field: "_id", headerName: "ID", width: 90 },
         { field: "name", headerName: "Name", width: 150 },
         { field: "address", headerName: "Address", width: 180 },
         { field: "bloodgroup", headerName: "Blood Group", width: 80 },
@@ -19,7 +19,7 @@ const Donors = () => {
             renderCell: (params) => {
                 return (
                     <>
-                        <Link to={`/admin/donor/123`}>
+                        <Link to={`/admin/donor/${params.row._id}`}>
 
                             <button className='text-white cursor-pointer w-[70px]'>
                                 <FaEdit className='text-cyan-600 cursor-pointer m-2 text-[16px]' />
@@ -69,21 +69,10 @@ const Donors = () => {
     }
 
 
-    /* const rows = [
-        { id: 1, name: "Arun Kumar", address: "Chennai, TN", bloodgroup: "B+", healthissues: "None" },
-        { id: 2, name: "Kaviya Ramesh", address: "Coimbatore, TN", bloodgroup: "O-", healthissues: "Asthma" },
-        { id: 3, name: "Suresh Babu", address: "Madurai, TN", bloodgroup: "A+", healthissues: "None" },
-        { id: 4, name: "Anjali Venkatesh", address: "Tiruchirappalli, TN", bloodgroup: "AB+", healthissues: "Diabetes" },
-        { id: 5, name: "Meera Rajan", address: "Salem, TN", bloodgroup: "O+", healthissues: "None" },
-        { id: 6, name: "Vijayalakshmi Muthusamy", address: "Erode, TN", bloodgroup: "A-", healthissues: "Thyroid" },
-        { id: 7, name: "Rajesh Kumar", address: "Tirunelveli, TN", bloodgroup: "B-", healthissues: "None" },
-        { id: 8, name: "Jaya Subramanian", address: "Vellore, TN", bloodgroup: "AB-", healthissues: "Heart Disease" },
-        { id: 9, name: "Pooja Srinivasan", address: "Kanchipuram, TN", bloodgroup: "O+", healthissues: "Hypertension" },
-        { id: 10, name: "Karthik Narayanan", address: "Cuddalore, TN", bloodgroup: "B+", healthissues: "None" },
-    ]; */
+
     return (
         <div className='w-[80vw] h-[100vh]'>
-            <div className='flex items-center justify-between m-[40px]'>
+            <div className='flex items-center justify-around m-[40px]'>
                 <h1 className='m-[20px] text-[20px] font-semibold'>All Donors</h1>
                 <Link to="/admin/newdonor">
                     <button className='text-[18px] bg-green-600 p-3 rounded-md cursor-pointer text-white font-semibold'>Add Donor</button>
