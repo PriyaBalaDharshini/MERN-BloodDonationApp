@@ -2,15 +2,20 @@ import donorModel from "../models/donorModel.js";
 
 const createDonor = async (req, res) => {
     try {
-        const { name, email, address, mobile, bloodgroup, weight, age, healthissues, bp } = req.body
-        if (!name || !email || !address || !mobile || !bloodgroup || !weight || !age) {
+        const { name, email, address, mobile, bloodgroup, weight, age, healthissues, bp } = req.body;
+
+        // Check if all required fields are present
+        if (!name || !email || !address || !mobile || !bloodgroup || !weight || !age || !healthissues || !bp) {
             return res.status(400).json({ message: "Please provide all required fields." });
         }
+
+        // Check for an existing donor by email
         const existingDonor = await donorModel.findOne({ email });
         if (existingDonor) {
             return res.status(400).json({ message: "Donor with this email already exists." });
         }
 
+        // Create and save a new donor
         const newDonor = new donorModel({
             name,
             email,
@@ -23,13 +28,11 @@ const createDonor = async (req, res) => {
             bp
         });
 
-        // Save the new donor to the database
         await newDonor.save();
         res.status(201).json({ message: "Donor created successfully.", newDonor });
-
     } catch (error) {
         console.log(error);
-        res.status(500).json({ message: "Internal Server Error" })
+        res.status(500).json({ message: "Internal Server Error" });
     }
 }
 

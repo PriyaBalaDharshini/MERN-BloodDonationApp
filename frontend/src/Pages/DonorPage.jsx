@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
-import { publicRequest } from '../requestMethods'
+import { publicRequest } from '../requestMethods.js'
 
 const DonorPage = () => {
 

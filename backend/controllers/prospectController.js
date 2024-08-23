@@ -2,10 +2,14 @@ import prospectModel from "../models/prospectModel.js";
 
 const createProspect = async (req, res) => {
     try {
-        const { name, email, address, mobile, bloodgroup, weight, age, healthissues, bp } = req.body
+        const { name, email, address, mobile, bloodgroup, weight, age, healthissues, bp } = req.body;
+
+        console.log("Received data:", req.body);
+
         if (!name || !email || !address || !mobile || !bloodgroup || !weight || !age) {
             return res.status(400).json({ message: "Please provide all required fields." });
         }
+
         const existingProspect = await prospectModel.findOne({ email });
         if (existingProspect) {
             return res.status(400).json({ message: "Prospect with this email already exists." });
@@ -23,13 +27,12 @@ const createProspect = async (req, res) => {
             bp
         });
 
-        // Save the new Prospect to the database
         await newProspect.save();
         res.status(201).json({ message: "Prospect created successfully.", newProspect });
 
     } catch (error) {
-        console.log(error);
-        res.status(500).json({ message: "Internal Server Error" })
+        console.log("Error creating prospect:", error);
+        res.status(500).json({ message: "Internal Server Error" });
     }
 }
 

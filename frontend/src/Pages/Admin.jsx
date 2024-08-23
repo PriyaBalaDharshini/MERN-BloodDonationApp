@@ -1,23 +1,37 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Gauge } from '@mui/x-charts/Gauge';
 import { LineChart } from "@mui/x-charts/LineChart"
 import { FaSignOutAlt } from "react-icons/fa"
 import { PieChart } from '@mui/x-charts/PieChart';
+import { publicRequest } from '../requestMethods';
 
 
-const data = [
-    { id: 0, value: 10, label: 'A+' },
-    { id: 1, value: 15, label: 'A-' },
-    { id: 2, value: 20, label: 'B+' },
-    { id: 3, value: 20, label: 'B-' },
-    { id: 4, value: 20, label: 'O+' },
-    { id: 5, value: 20, label: 'O-' },
-    { id: 6, value: 20, label: 'AB+' },
-    { id: 7, value: 20, label: 'AB-' },
-
-];
 
 const Admin = () => {
+
+    const [bloodgroup, setBloodgroup] = useState([])
+    useEffect(() => {
+        const getBloodgroupStats = async () => {
+            try {
+                const res = await publicRequest.get("/donor/stats")
+                console.log(res.data);
+
+                const transformedData = res.data.map((item, index) => ({
+                    id: index,
+                    value: item.count,
+                    label: `Blood Group ${item._id}`
+                }))
+                setBloodgroup(transformedData)
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        getBloodgroupStats()
+    }, [])
+
+    const data = bloodgroup;
+
+
     return (
         <div className='flex  items-center justify-between v-[100vh]'>
             <div className='flex flex-col m-[30px]'>
@@ -74,7 +88,7 @@ const Admin = () => {
                                 faded: { innerRadius: 30, additionalRadius: -30, color: 'gray' },
                             },
                         ]}
-                        height={300}
+                        height={400}
                     />
 
                 </div>

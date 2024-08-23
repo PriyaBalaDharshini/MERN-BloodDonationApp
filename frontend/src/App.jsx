@@ -1,5 +1,7 @@
 import React from 'react'
 import { Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Home from './Pages/Home'
 import Login from './Pages/Login'
 import Admin from './Pages/Admin'
@@ -68,6 +70,7 @@ function App() {
   return (
     <>
       <RouterProvider router={router} />
+      <ToastContainer />
     </>
   )
 }

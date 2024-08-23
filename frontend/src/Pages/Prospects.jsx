@@ -14,14 +14,14 @@ const Prospects = () => {
         { field: "bloodgroup", headerName: "Blood Group", width: 80 },
         { field: "healthissues", headerName: "Health Issues", width: 150 },
         {
-            field: "approve", headerName: "Approve", width: 100,
+            field: "action", headerName: "Action", width: 100,
             renderCell: (params) => {
                 return (
                     <>
                         <Link to={`/admin/prospect/${params.row._id}`}>
 
                             <button className='text-black font-bold m-3px bg-green-400 rounded-xl  cursor-pointer w-[70px]'>
-                                Approve
+                                Action
                             </button>
 
                         </Link>
