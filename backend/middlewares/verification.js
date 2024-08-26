@@ -8,7 +8,7 @@ export const verifyToken = (req, res, next) => {
     console.log("Auth Header:", authHeader); // Log the auth header
 
     if (authHeader) {
-        const token = authHeader.split(" ")[1];
+        const token = authHeader.split("")[1];
         console.log("Token:", token); // Log the token
 
         jwt.verify(token, process.env.JWT_SEC, (err, user) => {
