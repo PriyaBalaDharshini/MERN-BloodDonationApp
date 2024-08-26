@@ -1,5 +1,5 @@
 import React from 'react'
-import { Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom'
+import { Navigate, Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Home from './Pages/Home'
@@ -11,8 +11,11 @@ import Menu from './Components/Menu'
 import NewDonor from './Pages/NewDonor'
 import ProspectPage from './Pages/ProspectPage'
 import DonorPage from './Pages/DonorPage'
+import { useSelector } from "react-redux";
 
 function App() {
+  const user = useSelector((state) => state.user);
+
   const Layout = () => {
     return (
       <div className='flex'>
@@ -37,7 +40,7 @@ function App() {
     },
     {
       path: "/admin",
-      element: <Layout />,
+      element: user.currentUser ? <Layout /> : <Navigate to={"/login"} />,
       children: [
         {
           path: "/admin",

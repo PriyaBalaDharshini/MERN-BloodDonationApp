@@ -2,14 +2,18 @@ import React, { useEffect, useState } from 'react'
 import { Gauge } from '@mui/x-charts/Gauge';
 import { LineChart } from "@mui/x-charts/LineChart"
 import { FaSignOutAlt } from "react-icons/fa"
-import { PieChart } from '@mui/x-charts/PieChart';
+import { BarChart } from '@mui/x-charts/BarChart';
 import { publicRequest } from '../requestMethods';
-
-
+import { logout } from "../redux/userRedux.js"
+import { useDispatch } from "react-redux"
+import { useNavigate } from "react-router-dom"
 
 const Admin = () => {
 
     const [bloodgroup, setBloodgroup] = useState([])
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+
     useEffect(() => {
         const getBloodgroupStats = async () => {
             try {
@@ -17,9 +21,8 @@ const Admin = () => {
                 console.log(res.data);
 
                 const transformedData = res.data.map((item, index) => ({
-                    id: index,
-                    value: item.count,
-                    label: `Blood Group ${item._id}`
+                    bloodGroup: `${item._id}`,
+                    count: item.count,
                 }))
                 setBloodgroup(transformedData)
             } catch (error) {
@@ -29,8 +32,10 @@ const Admin = () => {
         getBloodgroupStats()
     }, [])
 
-    const data = bloodgroup;
-
+    const handleLogout = () => {
+        dispatch(logout())
+        navigate("/login")
+    }
 
     return (
         <div className='flex  items-center justify-between v-[100vh]'>
@@ -72,23 +77,21 @@ const Admin = () => {
                     />
                 </div>
             </div>
-            <div className='flex flex-col h-[100vh] bg-green-50 p-[10px] w-[300px] shadow-lg border-solid border-2 border-green-100 rounded-md'>
+            <div className='flex flex-col h-[100vh] bg-green-50 p-[10px] w-[350px] shadow-lg border-solid border-2 border-green-100 rounded-md'>
                 <div className='flex items-center justify-center mt-[20px] cursor-pointer'>
-                    <FaSignOutAlt className='text-[20px]' /> <span className='ml-4 font-semibold text-[18px]'>Logout</span>
+                    <FaSignOutAlt className='text-[20px]' /> <span className='ml-4 font-semibold text-[18px]' onClick={handleLogout}>Logout</span>
 
                 </div>
 
 
                 <div className='mt-[20px]'>
-                    <PieChart
-                        series={[
-                            {
-                                data,
-                                highlightScope: { faded: 'global', highlighted: 'item' },
-                                faded: { innerRadius: 30, additionalRadius: -30, color: 'gray' },
-                            },
-                        ]}
+                    <BarChart
+                        dataset={bloodgroup}
+                        yAxis={[{ scaleType: 'band', dataKey: 'bloodGroup' }]} // Y-axis for blood group labels
+                        series={[{ dataKey: 'count', label: 'Donor Count' }]} // Bar values (donor count)
+                        layout="horizontal" // Horizontal bar chart
                         height={400}
+                        margin={{ top: 50, bottom: 20 }}
                     />
 
                 </div>

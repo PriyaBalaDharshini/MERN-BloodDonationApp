@@ -11,7 +11,8 @@ const Donors = () => {
     const columns = [
         { field: "_id", headerName: "ID", width: 90 },
         { field: "name", headerName: "Name", width: 150 },
-        { field: "address", headerName: "Address", width: 180 },
+        { field: "address", headerName: "Address", width: 150 },
+        { field: "age", headerName: "Age", width: 80 },
         { field: "bloodgroup", headerName: "Blood Group", width: 80 },
         { field: "healthissues", headerName: "Health Issues", width: 150 },
         {

@@ -2,10 +2,14 @@ import React, { useState } from 'react'
 import { publicRequest } from '../requestMethods.js'
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from "react-redux";
 
 const NewDonor = () => {
     const [input, setInput] = useState({})
     const navigate = useNavigate();
+    const user = useSelector((state) => state.user)
+
+    console.log(user.currentUser.accessToken);
 
     const handleChange = (e) => {
         setInput((prev) => {
@@ -16,7 +20,9 @@ const NewDonor = () => {
     const handleAddDonor = async () => {
         try {
             console.log(input); // Log input data
-            const response = await publicRequest.post("/donor/createDonor", input);
+            const response = await publicRequest.post("/donor/createDonor", input, {
+                headers: { token: `Bearer ${user.currentUser.accessToken}` }
+            });
             console.log(response); // Log server response
             toast.success("Donor added successfully");
             setInput({});
