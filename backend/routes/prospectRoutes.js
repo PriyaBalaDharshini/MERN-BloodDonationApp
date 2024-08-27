@@ -8,6 +8,7 @@ router.post("/createProspect", prospectController.createProspect)
 router.get("/allProspects", prospectController.getAllProspects)
 router.get("/getProspect/:id", prospectController.getOneProspect)
 router.get("/stats", prospectController.prospectStatistics)
+router.get("/count", prospectController.prospectCount)
 
 router.put("/updateProspect/:id", prospectController.updateProspect)
 

@@ -4,11 +4,15 @@ import { verifyAuthorization, verifyToken } from "../middlewares/verification.js
 
 const router = express.Router()
 
-router.post("/createDonor", verifyToken, donorController.createDonor)
+router.post("/createDonor", /* verifyToken, */ donorController.createDonor)
 
 router.get("/allDonors", donorController.getAllDonors)
 router.get("/getDonor/:id", donorController.getOneDonor)
 router.get("/stats", donorController.donorStatistics)
+router.get("/count", donorController.donorCount)
+router.get("/recentDonors", donorController.recentDonors)
+router.get("/distribution", donorController.donorDistributionByAgeGroup)
+
 
 router.put("/updateDonor/:id", donorController.updateDonor)
 

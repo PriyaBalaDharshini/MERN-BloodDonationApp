@@ -119,5 +119,55 @@ const donorStatistics = async (req, res) => {
     }
 }
 
+const donorCount = async (req, res) => {
+    try {
+        const count = await donorModel.countDocuments();
+        res.status(200).json({ count });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Internal Server Error", error });
+    }
+}
 
-export default { createDonor, getAllDonors, getOneDonor, updateDonor, deleteDonor, donorStatistics }
+const recentDonors = async (req, res) => {
+    try {
+        const recentDonors = await donorModel.find().sort({ createdAt: -1 }).limit(5); // Get last 5 donors
+        res.status(200).json(recentDonors);
+    } catch (err) {
+        res.status(500).json(err);
+    }
+}
+
+const donorDistributionByAgeGroup = async (req, res) => {
+    try {
+        const distribution = await donorModel.aggregate([
+            {
+                $bucket: {
+                    groupBy: "$age",
+                    boundaries: [0, 18, 30, 45, 60, 100],
+                    default: "Unknown",
+                    output: {
+                        count: { $sum: 1 }
+                    }
+                }
+            }
+        ]);
+        res.status(200).json(distribution);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Internal Server Error", error });
+    }
+}
+
+
+export default {
+    createDonor,
+    getAllDonors,
+    getOneDonor,
+    updateDonor,
+    deleteDonor,
+    donorStatistics,
+    donorCount,
+    recentDonors,
+    donorDistributionByAgeGroup
+}

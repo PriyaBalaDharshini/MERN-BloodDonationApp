@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 
 const Contact = () => {
     const [input, setInput] = useState({})
+    const [loading, setLoading] = useState(false); // Loading state
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -14,7 +15,12 @@ const Contact = () => {
     };
 
     const handleProspects = async () => {
+        if (!input.name || !input.email || !input.mobile || !input.bloodgroup || !input.weight || !input.age) {
+            toast.error("Please fill all the required fields");
+            return;
+        }
         try {
+            setLoading(true);
             console.log(input); // Log input data
             const response = await publicRequest.post("/prospect/createProspect", input);
             console.log(response); // Log server response
@@ -25,6 +31,8 @@ const Contact = () => {
         } catch (error) {
             console.log(error);
             toast.error(error.message)
+        } finally {
+            setLoading(false);
         }
     }
 
@@ -32,7 +40,7 @@ const Contact = () => {
     return (
         <div className='flex items-center justify-center my-[80px]'>
             <div className='flex flex-col bg-red-200 h-auto w-[50%] p-[50px] rounded-xl'>
-                <span className='text-[20px] my-[20px]'>Ready to Save a Life? Share Your Details for Blood Donation</span>
+                <span className='text-[20px] my-[20px] font-semibold'>Ready to Save a Life? Share Your Details for Blood Donation</span>
                 <label htmlFor="name" className='text-[18px] my-[15px] font-semibold'>
                     Name:
                 </label>

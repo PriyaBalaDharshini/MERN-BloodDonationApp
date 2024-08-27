@@ -119,5 +119,23 @@ const prospectStatistics = async (req, res) => {
     }
 }
 
+const prospectCount = async (req, res) => {
+    try {
+        const prospectCount = await prospectModel.countDocuments();
+        res.status(200).json({ count: prospectCount });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Internal Server Error", error });
+    }
+}
 
-export default { createProspect, getAllProspects, getOneProspect, updateProspect, deleteProspect, prospectStatistics }
+
+export default {
+    createProspect,
+    getAllProspects,
+    getOneProspect,
+    updateProspect,
+    deleteProspect,
+    prospectStatistics,
+    prospectCount
+}
