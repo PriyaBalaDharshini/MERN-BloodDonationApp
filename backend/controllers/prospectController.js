@@ -1,4 +1,6 @@
+import sendEmail from "../mailServices/senMail.js";
 import prospectModel from "../models/prospectModel.js";
+import ejs from 'ejs'
 
 const createProspect = async (req, res) => {
     try {
@@ -29,6 +31,21 @@ const createProspect = async (req, res) => {
 
         await newProspect.save();
         res.status(201).json({ message: "Prospect created successfully.", newProspect });
+
+        if (age < 18) {
+            ejs.renderFile("emailTemplates/notEligibleMail.ejs",
+                { name, age },
+                async (err, data) => {
+                    if (err) {
+                        console.log(err);
+                    } else { sendEmail(email, "Not Elgible", data) }
+                }
+            )
+
+        } else {
+            sendEmail(email, "Welcom", "You are welcome")
+        }
+
 
     } catch (error) {
         console.log("Error creating prospect:", error);
