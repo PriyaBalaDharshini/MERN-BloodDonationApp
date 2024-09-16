@@ -3,7 +3,7 @@ import dotenv from "dotenv"
 
 dotenv.config();
 
-const createTransporter = (config) => {
+const createTransporter = (config) => { 
     const transporter = nodemailer.createTransport(config);
     return transporter;
 }

@@ -27,6 +27,25 @@ const sendEligibilityEmail = async () => {
                     }
 
                 )
+            } else {
+                ejs.renderFile("templates/BloodDonationDonor.ejs",
+                    { name: prospect.name, age: prospect.age, weight: prospect.weight },
+                    async (error, data) => {
+                        let messageOption = {
+                            from: process.env.EMAIL,
+                            to: prospect.email,
+                            subject: "Blood Donation Eligibility ",
+                            html: data
+                        }
+                        try {
+                            sendMail(messageOption)
+                            await prospectModel.findByIdAndUpdate(prospect._id, { $set: { status: 1 } })
+                        } catch (error) {
+                            console.log(error);
+                        }
+                    }
+
+                )
             }
         }
     }
