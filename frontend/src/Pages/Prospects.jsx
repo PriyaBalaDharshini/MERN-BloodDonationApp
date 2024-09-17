@@ -8,12 +8,16 @@ const Prospects = () => {
     const [prospects, setProspects] = useState([])
 
     const columns = [
-        { field: "_id", headerName: "ID", width: 120 },
+        { field: "_id", headerName: "ID", width: 80 },
         { field: "name", headerName: "Name", width: 150 },
+        { field: "email", headerName: "Email", width: 80 },
         { field: "address", headerName: "Address", width: 180 },
+        { field: "mobile", headerName: "Mobile", width: 80 },
         { field: "bloodgroup", headerName: "Blood Group", width: 80 },
-        { field: "healthissues", headerName: "Health Issues", width: 150 },
+        { field: "healthissues", headerName: "Health Issues", width: 80 },
         { field: "age", headerName: "Age", width: 80 },
+        { field: "weight", headerName: "Weight", width: 80 },
+        { field: "bp", headerName: "BP", width: 80 },
         {
             field: "action", headerName: "Action", width: 100,
             renderCell: (params) => {

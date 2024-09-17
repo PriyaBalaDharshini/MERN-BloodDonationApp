@@ -32,19 +32,19 @@ const createProspect = async (req, res) => {
         await newProspect.save();
         res.status(201).json({ message: "Prospect created successfully.", newProspect });
 
-        if (age < 18) {
-            ejs.renderFile("emailTemplates/notEligibleMail.ejs",
-                { name, age },
-                async (err, data) => {
-                    if (err) {
-                        console.log(err);
-                    } else { sendEmail(email, "Not Elgible", data) }
-                }
-            )
-
-        } else {
-            sendEmail(email, "Welcom", "You are welcome")
-        }
+        /*  if (age < 18) {
+             ejs.renderFile("emailTemplates/notEligibleMail.ejs",
+                 { name, age },
+                 async (err, data) => {
+                     if (err) {
+                         console.log(err);
+                     } else { sendEmail(email, "Not Elgible", data) }
+                 }
+             )
+ 
+         } else {
+             sendEmail(email, "Welcom", "You are welcome")
+         } */
 
 
     } catch (error) {

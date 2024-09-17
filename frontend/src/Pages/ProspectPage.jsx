@@ -92,9 +92,9 @@ const ProspectPage = () => {
                     <li className='mt-[14px]'>
                         <strong>Health Issues - </strong>{prospect.healthissues}
                     </li>
-                    <li className='mt-[14px]'>
+                    {/* <li className='mt-[14px]'>
                         <strong>Date - </strong>{prospect.date}
-                    </li>
+                    </li> */}
                     <li className='mt-[14px]'>
                         <strong>Weight - </strong>{prospect.weight} kg
                     </li>
@@ -104,9 +104,7 @@ const ProspectPage = () => {
                     <li className='mt-[14px]'>
                         <strong>Blood Pressure - </strong>{prospect.bp}
                     </li>
-                    <li className='mt-[14px]'>
-                        <strong>Status - </strong>{prospect.status}
-                    </li>
+
                 </ul>
                 <span className='font-semibold  text-[16px] text-red-600'>Do you want to approve Priya to donor list?</span>
                 <div className='flex flex-row items-center justify-evenly mt-[20px]'>
