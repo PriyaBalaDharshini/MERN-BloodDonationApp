@@ -26,19 +26,6 @@ const ProspectPage = () => {
 
     const approveProspect = async () => {
         try {
-            /* console.log("Approving prospect with data:", {
-                name: prospect.name,
-                address: prospect.address,
-                mobile: prospect.mobile,
-                email: prospect.email,
-                bloodgroup: prospect.bloodgroup,
-                healthissues: prospect.healthissues,
-                age: prospect.age,
-                weight: prospect.weight,
-                bp: prospect.bp,
-                date: prospect.date,
-            }); */
-
             await publicRequest.post(`/donor/createDonor`, {
                 name: prospect.name,
                 address: prospect.address,
@@ -49,9 +36,7 @@ const ProspectPage = () => {
                 age: prospect.age,
                 weight: prospect.weight,
                 bp: prospect.bp,
-                date: prospect.date,
             });
-
             await publicRequest.delete(`/prospect/deleteProspect/${prospectId}`);
             navigate("/admin/prospects");
         } catch (error) {
